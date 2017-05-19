@@ -7,7 +7,7 @@ import java.util.UUID;
  */
 public class Patrol {
     private UUID uuid;
-    private Map<UUID, Stormtrooper> collection = new HashMap<UUID, Stormtrooper>();
+    private Map<UUID, ImperialInterface> collection = new HashMap<UUID, ImperialInterface>();
 
     public Patrol() {
         this.uuid = UUID.randomUUID();
@@ -17,18 +17,29 @@ public class Patrol {
         return collection;
     }
 
-    public void addToCollection(Stormtrooper stormtrooper) {
-        this.collection.put(stormtrooper.getUuid(),stormtrooper);
+    public void addToCollection(ImperialInterface ImperialInterface) {
+        this.collection.put(ImperialInterface.getUuid(),ImperialInterface);
     }
 
     public void saluer() {
         if(this.collection.size() > 1){
             for (Object value : this.collection.values()) {
-                Stormtrooper st = (Stormtrooper) value;
+                ImperialInterface st = (ImperialInterface) value;
                 st.saluer(this);
             }
         } else {
             System.out.println("Pas assez de monde dans la collection pour saluer.");
         }
+    }
+
+    public String quelSalut(ImperialInterface saluant, ImperialInterface salue){
+        if(saluant.getRank() > salue.getRank()){
+            return saluant.getName()+" : Salutations, "+salue.getName()+" vermine";
+        } else if(saluant.getRank() < salue.getRank()){
+            return saluant.getName()+" : Salutations, votre altesse "+salue.getName();
+        } else if(saluant.getRank() == salue.getRank()){
+            return saluant.getName()+" : Ouesh gros, "+salue.getName();
+        }
+        return "";
     }
 }

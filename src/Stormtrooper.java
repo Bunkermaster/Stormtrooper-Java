@@ -6,10 +6,11 @@ import java.util.*;
 /**
  * Created by yann on 19/05/2017.
  */
-public class Stormtrooper {
+public class Stormtrooper implements ImperialInterface{
     private UUID uuid;
     private String name;
     private ArrayList<UUID> dejaSalue;
+    private int rank = 0;
 
     public Stormtrooper(String name) {
         this.name = name;
@@ -25,11 +26,11 @@ public class Stormtrooper {
         // on salue la collection
         if(patrol.getCollection().size() > 1){
             for (Object value : patrol.getCollection().values()) {
-                Stormtrooper st = (Stormtrooper) value;
+                ImperialInterface st = (ImperialInterface) value;
                 // verification du salue deja fait
                 if(this.uuid != st.getUuid() && !dejaSalue.contains(st.getUuid())){
                     this.dejaSalue.add(st.getUuid());
-                    System.out.println(this.name + " : Bonjour, " + st.getName());
+                    System.out.println(patrol.quelSalut(this, st));
                     st.saluer(patrol);
                 }
             }
@@ -44,5 +45,9 @@ public class Stormtrooper {
 
     public String getName() {
         return name;
+    }
+
+    public int getRank() {
+        return rank;
     }
 }
