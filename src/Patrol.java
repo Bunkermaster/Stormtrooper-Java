@@ -6,11 +6,11 @@ import java.util.UUID;
  * Created by yann on 19/05/2017.
  */
 public class Patrol {
-    private String uuid;
-    private Map<String, Stormtrooper> collection = new HashMap<String, Stormtrooper>();
+    private UUID uuid;
+    private Map<UUID, Stormtrooper> collection = new HashMap<UUID, Stormtrooper>();
 
     public Patrol() {
-        this.uuid = UUID.randomUUID().toString();
+        this.uuid = UUID.randomUUID();
     }
 
     public Map getCollection() {
@@ -25,7 +25,7 @@ public class Patrol {
         if(this.collection.size() > 1){
             for (Object value : this.collection.values()) {
                 Stormtrooper st = (Stormtrooper) value;
-                st.saluer();
+                st.saluer(this);
             }
         } else {
             System.out.println("Pas assez de monde dans la collection pour saluer.");
